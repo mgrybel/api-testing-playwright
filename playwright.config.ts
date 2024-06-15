@@ -1,4 +1,5 @@
 import { defineConfig } from '@playwright/test';
+import './fixtures/toMatchSchema';
 
 export default defineConfig({
   use: {
