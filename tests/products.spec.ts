@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { productSchema, productsSchema } from '../schemas/productSchema';
 
 test.describe('API Requests', () => {
   const USER = {
@@ -27,7 +28,11 @@ test.describe('API Requests', () => {
       },
     });
 
+    const responseBody = await response.json();
+
     expect(response.status()).toBe(200);
+    expect(response.ok()).toBeTruthy();
+    expect(() => productsSchema.parse(responseBody)).not.toThrow();
   });
 
   test('Get a single product', async ({ request }) => {
@@ -37,6 +42,18 @@ test.describe('API Requests', () => {
       },
     });
 
+    const responseBody = await response.json();
+
     expect(response.status()).toBe(200);
+    expect(response.ok()).toBeTruthy();
+    expect(() => productSchema.parse(responseBody)).not.toThrow();
+    expect(responseBody).toEqual({
+      id: 1,
+      name: 'Laptop',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam faucibus sapien massa, ut fringilla sapien facilisis pellentesque. Nulla facilisi. Sed sed blandit justo, non malesuada libero. Ut pulvinar magna vitae nulla placerat eleifend.',
+      price: 10,
+      imageUrl: '/products/product-1.jpeg',
+      stock: 99997
+    });
   });
 });
