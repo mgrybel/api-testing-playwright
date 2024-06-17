@@ -35,5 +35,5 @@ npm install
 From the **root** directory, run:
 
 ```bash
-npm playwright test
+npx playwright test
 ```
