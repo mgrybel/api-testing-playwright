@@ -1,4 +1,4 @@
-# API testing Playwright
+# API testing with Playwright
 
 Automated API tests of an e-commerce application built using **Playwright** with **TypeScript**.
 
